@@ -1,0 +1,377 @@
+{
+	"id": "be1d161e-62ec-4e9b-bdbe-713f85b502a1",
+	"name": "Task",
+	"description": null,
+	"auth": null,
+	"events": null,
+	"variables": [],
+	"order": [],
+	"folders_order": [
+		"a3fc5879-aee5-4a28-9ffa-52dc60692c52",
+		"43e744df-648f-4daa-ac61-7f0d776b9d27",
+		"049b597e-d9ed-479f-84f7-47e58ccc3168"
+	],
+	"protocolProfileBehavior": {},
+	"folders": [
+		{
+			"id": "a3fc5879-aee5-4a28-9ffa-52dc60692c52",
+			"name": "Authentication",
+			"description": null,
+			"auth": null,
+			"events": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "9e2c29df-ec40-4c4d-9d37-8303c86787d7",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "7f9a987a-fdaa-43c9-a695-87f600646c4f",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"collection": "be1d161e-62ec-4e9b-bdbe-713f85b502a1",
+			"folder": null,
+			"order": [
+				"c0926cbe-dacd-4338-8cda-cbf3eb55ebea",
+				"025ae668-3238-42e3-9859-866a82cbdfe1",
+				"e2dbb1d2-30cd-4320-9026-847ca84237db"
+			],
+			"folders_order": [],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"id": "43e744df-648f-4daa-ac61-7f0d776b9d27",
+			"name": "Post (tweet)",
+			"description": "",
+			"auth": null,
+			"events": null,
+			"collection": "be1d161e-62ec-4e9b-bdbe-713f85b502a1",
+			"folder": null,
+			"order": [
+				"4990619a-af19-42bc-9273-de80df1de6f0"
+			],
+			"folders_order": [],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"id": "049b597e-d9ed-479f-84f7-47e58ccc3168",
+			"name": "Users",
+			"description": "",
+			"auth": null,
+			"events": null,
+			"collection": "be1d161e-62ec-4e9b-bdbe-713f85b502a1",
+			"folder": null,
+			"order": [
+				"3653b758-6e7d-470e-be35-c4752e9a4d75",
+				"039b5d8f-ad2b-4aec-9d90-946594416646"
+			],
+			"folders_order": [],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"requests": [
+		{
+			"id": "025ae668-3238-42e3-9859-866a82cbdfe1",
+			"name": "Register",
+			"url": "{{url}}/auth/register",
+			"description": "- Uri\n\t- base-url/auth/register\n- Http Method\n\t- POST\n- Request Parameters\n\t- Header\n\t\t- Accept (string - value == application/json)\n\t\t- local (string - required)\n\t- Body\n\t\t- name (string - required)\n\t\t- email (string - required)\n\t\t- password (string - required)\n\t\t- image (file - required)\n\n- Response Parameters\n\t- data (object)\n\t\t- user\n\t\t\t- id (int)\n\t\t\t- name (string)\n\t\t\t- email (string)\n\t\t\t- image (string)\n\t\t- access_token (string) ==> using for authenticated apis\n\n\t\n\n- NOTES\n\t- access_token will be used for authenticated apis\n\t- any error response will be with [400,401,403,422] codes all has same structure of response array of messages like below error example\n\t- local parameter values will be ar for arabic response and en for english response\n\n\n- Success Example : \n\t- status code will be 201\n\t- {\n\t    \"data\": {\n\t        \"user\": {\n\t            \"id\": 2,\n\t            \"name\": \"test\",\n\t            \"email\": \"test@gmail.com\",\n\t            \"image\": \"http://task.test/storage/users/1605461798.jpg\"\n\t        },\n\t        \"access_token\": \"2|TPpOC3bqh0Hbav7YJsyiCwd0QqNaFEGPwN5MSe8T\"\n\t    }\n\t}\n\n- Error Example\n\t- {\n\t    \"message\": \"The given data was invalid.\",\n\t    \"errors\": {\n\t        \"email\": [\n\t            \"The email has already been taken.\"\n\t        ]\n\t    }\n\t}",
+			"data": [
+				{
+					"key": "name",
+					"value": "test",
+					"description": "user's name (required)",
+					"type": "text"
+				},
+				{
+					"key": "email",
+					"value": "test@gmail.com",
+					"description": "user's email",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "password",
+					"value": "123456",
+					"description": "user's password (required)",
+					"type": "text"
+				},
+				{
+					"key": "image",
+					"value": "/home/mustafa/Desktop/images/c903cdd18f1e41dbfcc61a5a6d5af772.jpg",
+					"description": "",
+					"type": "file",
+					"enabled": true
+				}
+			],
+			"dataOptions": {
+				"params": {}
+			},
+			"dataMode": "params",
+			"headerData": [
+				{
+					"key": "Accept",
+					"type": "text",
+					"value": "application/json"
+				},
+				{
+					"key": "local",
+					"value": "en",
+					"description": "response langauge ",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"method": "POST",
+			"pathVariableData": [],
+			"queryParams": [],
+			"auth": null,
+			"events": null,
+			"folder": "a3fc5879-aee5-4a28-9ffa-52dc60692c52",
+			"headers": "Accept: application/json\nlocal: en\n",
+			"pathVariables": {}
+		},
+		{
+			"id": "039b5d8f-ad2b-4aec-9d90-946594416646",
+			"name": "Time line",
+			"url": "{{url}}/user/timeline?page=1",
+			"description": "- Uri\n\t- base-url/user/timeline\n- Http Method\n\t- POST\n- Request Parameters\n\t- Header\n\t\t- Accept (string - value == application/json)\n\t\t- local (string - required)\n\t- Body\n\t\t- page (int - required)\n\n- Response Parameters\n\t- data (object)\n\t\t- id (int)\n\t\t- tweet_text (string)\n\t\t- user (object)\n\t\t\t- id (int)\n\t\t\t- name (string)\n\t\t\t- email (string)\n\t\t\t- image (string)\n\t- links (object)\n\t\t- first (string)\n\t\t- last (string)\n\t\t- prev (string)\n\t\t- next (string)\n\t- meta (object)\n\t\t- current_page (int)\n\t\t- from (int)\n\t\t- last_page (int)\n\t\t- path (string)\n\t\t- per_page (int)\n\t\t- to (int)\n\t\t- total (int)\n\t\n\n- NOTES\n\t- access_token will be used for authenticated apis\n\t- any error response will be with [400,401,403,422] codes all has same structure of response array of messages like below error example\n\t- local parameter values will be ar for arabic response and en for english response\n\n- Success Example : \n\t- status code will be 200\n\t- {\n\t    \"data\": [\n\t        {\n\t            \"id\": 1,\n\t            \"tweet_text\": \"It is a long established fact that a reader will be distracted\",\n\t            \"user\": {\n\t                \"id\": 1,\n\t                \"name\": \"test\",\n\t                \"email\": \"test@gmail.com\",\n\t                \"image\": \"http://task.test/storage/users/1605461595.jpg\"\n\t            }\n\t        }\n\t    ],\n\t    \"links\": {\n\t        \"first\": \"http://task.test/api/user/timeline?page=1\",\n\t        \"last\": \"http://task.test/api/user/timeline?page=1\",\n\t        \"prev\": null,\n\t        \"next\": null\n\t    },\n\t    \"meta\": {\n\t        \"current_page\": 1,\n\t        \"from\": 1,\n\t        \"last_page\": 1,\n\t        \"path\": \"http://task.test/api/user/timeline\",\n\t        \"per_page\": 10,\n\t        \"to\": 1,\n\t        \"total\": 1\n\t    }\n\t}",
+			"data": null,
+			"dataOptions": null,
+			"dataMode": null,
+			"headerData": [
+				{
+					"key": "Accept",
+					"value": "application/json",
+					"description": "",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "local",
+					"value": "en",
+					"description": "response language",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"method": "GET",
+			"pathVariableData": [],
+			"queryParams": [
+				{
+					"key": "page",
+					"value": "1",
+					"equals": true,
+					"description": "pagination page number",
+					"enabled": true
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "8|zTXfrY56zmUzZhw1ZaU1ySDWbXIiIxEGWGfffATd"
+					}
+				]
+			},
+			"events": [],
+			"folder": "049b597e-d9ed-479f-84f7-47e58ccc3168",
+			"headers": "Accept: application/json\nlocal: en\n",
+			"pathVariables": {}
+		},
+		{
+			"id": "3653b758-6e7d-470e-be35-c4752e9a4d75",
+			"name": "Follow",
+			"url": "{{url}}/user/follow",
+			"description": "- Uri\n\t- base-url/user/follow\n- Http Method\n\t- POST\n- Request Parameters\n\t- Header\n\t\t- Accept (string - value == application/json)\n\t\t- local (string - required)\n\t- Body\n\t\t- following_id (int - required)\n\n- Response Parameters\n\t- message (string)\n\n- NOTES\n\t- access_token will be used for authenticated apis\n\t- any error response will be with [400,401,403,422] codes all has same structure of response array of messages like below error example\n\t- local parameter values will be ar for arabic response and en for english response\n\n\n- Success Example : \n\t- status code will be 201\n\t- {\n\t    \"message\": \"تم المتابعة بنجاح\"\n\t}",
+			"data": [
+				{
+					"key": "following_id",
+					"value": "3",
+					"description": "following's id",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataOptions": {
+				"params": {}
+			},
+			"dataMode": "params",
+			"headerData": [
+				{
+					"key": "Accept",
+					"type": "text",
+					"value": "application/json"
+				},
+				{
+					"description": "response langauge ",
+					"enabled": true,
+					"key": "local",
+					"type": "text",
+					"value": "en"
+				}
+			],
+			"method": "POST",
+			"pathVariableData": [],
+			"queryParams": [],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "8|zTXfrY56zmUzZhw1ZaU1ySDWbXIiIxEGWGfffATd"
+					}
+				]
+			},
+			"events": null,
+			"folder": "049b597e-d9ed-479f-84f7-47e58ccc3168",
+			"headers": "Accept: application/json\nlocal: en\n",
+			"pathVariables": {}
+		},
+		{
+			"id": "4990619a-af19-42bc-9273-de80df1de6f0",
+			"name": "Create",
+			"url": "{{url}}/post/store",
+			"description": "- Uri\n\t- base-url/post/create\n- Http Method\n\t- POST\n- Request Parameters\n\t- Header\n\t\t- Accept (string - value == application/json)\n\t\t- local (string - required)\n\t- Body\n\t\t- tweet_text (string - required)\n\n- Response Parameters\n\t- data (object)\n\t\t- id (int)\n\t\t- tweet_text (string)\n\t\t- user (object)\n\t\t\t- id (int)\n\t\t\t- name (string)\n\t\t\t- email (string)\n\t\t\t- image (string)\n\n\n- NOTES\n\t- access_token will be used for authenticated apis\n\t- any error response will be with [400,401,403,422] codes all has same structure of response array of messages like below error example\n\t- local parameter values will be ar for arabic response and en for english response\n\n\n- Success Example : \n\t- status code will be 201\n\t- {\n\t    \"data\": {\n\t        \"id\": 1,\n\t        \"tweet_text\": \"It is a long established fact that a reader will be distracted\",\n\t        \"user\": {\n\t            \"id\": 1,\n\t            \"name\": \"test\",\n\t            \"email\": \"test@gmail.com\",\n\t            \"image\": \"http://task.test/storage/users/1605461595.jpg\"\n\t        }\n\t    }\n\t}\n\n- Error Example\n\t- {\n\t    \"message\": \"The given data was invalid.\",\n\t    \"errors\": {\n\t        \"tweet_text\": [\n\t            \"The tweet text must be 140 characters.\"\n\t        ]\n\t    }\n\t}",
+			"data": [
+				{
+					"key": "tweet_text",
+					"value": "It is a long established fact that a reader will be distracted",
+					"description": "post's text",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataOptions": {
+				"params": {}
+			},
+			"dataMode": "params",
+			"headerData": [
+				{
+					"key": "Accept",
+					"type": "text",
+					"value": "application/json"
+				},
+				{
+					"description": "response langauge ",
+					"enabled": true,
+					"key": "local",
+					"type": "text",
+					"value": "ar"
+				}
+			],
+			"method": "POST",
+			"pathVariableData": [],
+			"queryParams": [],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "8|zTXfrY56zmUzZhw1ZaU1ySDWbXIiIxEGWGfffATd"
+					}
+				]
+			},
+			"events": null,
+			"folder": "43e744df-648f-4daa-ac61-7f0d776b9d27",
+			"headers": "Accept: application/json\nlocal: ar\n",
+			"pathVariables": {}
+		},
+		{
+			"id": "c0926cbe-dacd-4338-8cda-cbf3eb55ebea",
+			"name": "Login",
+			"url": "{{url}}/auth/login",
+			"description": "- Uri\n\t- base-url/auth/login\n- Http Method\n\t- POST\n- Request Parameters\n\t- Header\n\t\t- Accept (string - value == application/json)\n\t\t- local (string - required)\n\t- Body\n\t\t- email (string - required)\n\t\t- password (string - required)\n\n- Response Parameters\n\t- data (object)\n\t\t- user\n\t\t\t- id (int)\n\t\t\t- name (string)\n\t\t\t- email (string)\n\t\t\t- image (string)\n\t\t- access_token (string) ==> using for authenticated apis\n\n\t\n\n- NOTES\n\t- access_token will be used for authenticated apis\n\t- any error response will be with [400,401,403,422] codes all has same structure of response array of messages like below error example\n\t- local parameter values will be ar for arabic response and en for english response\n\n- Success Example : \n\t- status code will be 200\n\t- {\n\t    \"data\": {\n\t        \"user\": {\n\t            \"id\": 2,\n\t            \"name\": \"test\",\n\t            \"email\": \"test@gmail.com\",\n\t            \"image\": \"http://task.test/storage/users/1605461798.jpg\"\n\t        },\n\t        \"access_token\": \"2|TPpOC3bqh0Hbav7YJsyiCwd0QqNaFEGPwN5MSe8T\"\n\t    }\n\t}\n\n- Error Example\n\t- {\n\t    \"message\": \"The given data was invalid.\",\n\t    \"errors\": {\n\t        \"email\": [\n\t            \"The selected email is invalid.\"\n\t        ]\n\t    }\n\t}",
+			"data": [
+				{
+					"key": "email",
+					"value": "test@gmail.com",
+					"description": "user's email (required)",
+					"type": "text"
+				},
+				{
+					"key": "password",
+					"value": "123456",
+					"description": "user's password (required)",
+					"type": "text"
+				}
+			],
+			"dataOptions": {
+				"params": {}
+			},
+			"dataMode": "params",
+			"headerData": [
+				{
+					"key": "Accept",
+					"type": "text",
+					"value": "application/json"
+				},
+				{
+					"key": "local",
+					"value": "en",
+					"description": "response language",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"method": "POST",
+			"pathVariableData": [],
+			"queryParams": [],
+			"auth": null,
+			"events": null,
+			"folder": "a3fc5879-aee5-4a28-9ffa-52dc60692c52",
+			"headers": "Accept: application/json\nlocal: en\n",
+			"pathVariables": {}
+		},
+		{
+			"id": "e2dbb1d2-30cd-4320-9026-847ca84237db",
+			"name": "Logout",
+			"url": "{{url}}/auth/logout",
+			"description": "- Uri\n\t- base-url/auth/logout\n- Http Method\n\t- POST\n- Request Parameters\n\t- Header\n\t\t- Accept (string - value == application/json)\n\t\t- bearer token (string - required)\n\t\t- local (string - required)\n\t\t\n- Response Parameters\n\t- msg (array of strings)\n\n- NOTES\n\t- bearer token is access_token parameter from login or register response\n\t- any error response will be with [400,401,403] codes all has same structure of response array of messages like below error example\n\t- local parameter values will be ar for arabic response and en for english response\n\n- Success Example : \n\t- status code will be 200\n\t- {\n\t    \"msg\": [\n\t        \"تم تسجيل الخروج بنجاح\"\n\t    ]\n\t}\n\n- Error Example\n\t- status code will be one of above error code in notes list\n\t- {\n\t    \"msg\": [\n\t        \"برجاء تسجيل الدخول اولا\"\n\t    ]\n\t}",
+			"data": null,
+			"dataOptions": null,
+			"dataMode": null,
+			"headerData": [
+				{
+					"key": "Accept",
+					"value": "application/json",
+					"type": "text"
+				},
+				{
+					"key": "local",
+					"value": "en",
+					"description": "response language",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"method": "POST",
+			"pathVariableData": [],
+			"queryParams": [],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "9|U9rYoREJqR5XNxLW8BfZui2KweLym8WgDUtzAh4P"
+					}
+				]
+			},
+			"events": null,
+			"folder": "a3fc5879-aee5-4a28-9ffa-52dc60692c52",
+			"headers": "Accept: application/json\nlocal: en\n",
+			"pathVariables": {}
+		}
+	]
+}
