@@ -4,6 +4,7 @@
 namespace App\Services;
 
 
+use App\Http\Resources\User\UserResource;
 use App\Repositories\UserRepository;
 
 class UserService
@@ -55,5 +56,16 @@ class UserService
         return $this->userRepository->following($userId);
     }
 
-
+    /**
+     * Auth response.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function authResponse($user)
+    {
+        $accessToken = $user->createToken("tweet")->plainTextToken;
+        $data['user'] = new UserResource($user);
+        $data['access_token'] = $accessToken;
+        return $data;
+    }
 }

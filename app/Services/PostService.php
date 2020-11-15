@@ -33,14 +33,4 @@ class PostService
         return $this->postRepository->list($data);
     }
 
-    /**
-     * Get specific post details.
-     *
-     * @return \App\Post $post
-     */
-    public function getPostDetails($id)
-    {
-        return $this->postRepository->getPostDetails($id);
-    }
-
 }

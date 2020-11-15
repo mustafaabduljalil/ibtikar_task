@@ -7,6 +7,7 @@ use App\Http\Requests\User\RegisterRequest;
 use App\Http\Resources\User\UserResource;
 use App\Services\UserService;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
@@ -31,18 +32,11 @@ class AuthController extends Controller
      */
     public function register(RegisterRequest $request)
     {
-        $validated = $request->validated();
-        // hash user's password
-        $validated['password'] = bcrypt($validated['password']);
-        // store image
-        $validated['image'] = HelperController::uploadImage($validated['image'],'users');
         // create new user
-        $user = $this->userService->store($validated);
+        $user = $this->userService->store($request->validated());
         // create user's access token
-        $accessToken = $user->createToken("tweet")->plainTextToken;
-        $data['user'] = new UserResource($user);
-        $data['access_token'] = $accessToken;;
-        return response()->json(['data' => $data],201);
+        $data = $this->userService->authResponse($user);
+        return response()->json(['data' => $data],Response::HTTP_CREATED);
 
     }
 
@@ -56,17 +50,13 @@ class AuthController extends Controller
      */
     public function login(LoginRequest $request)
     {
-        $validated = $request->validated();
-        if (Auth::attempt(['email' => $validated['email'], 'password' => $validated['password']])){
+        if (Auth::attempt(['email' => $request->email, 'password' => $request->password])){
             // generate access token for user
-            $user = $this->userService->getUser('email',$validated['email']);
-            $accessToken = $user->createToken("tweet")->plainTextToken;
-            $data['user'] = new UserResource($user);
-            $data['access_token'] = $accessToken;;
-            return response()->json(['data' => $data],200);
+            $user = $this->userService->getUser('email',$request->email);
+            $data = $this->userService->authResponse($user);
+            return response()->json(['data' => $data],Response::HTTP_OK);
         }
-
-        return response()->json(HelperController::responseFormat(__('messages.incorrect_email_or_password')),401);
+        return response()->json(responseFormat(__('messages.incorrect_email_or_password')),Response::HTTP_UNAUTHORIZED);
     }
 
     /**
@@ -76,6 +66,6 @@ class AuthController extends Controller
      */
     public function logout(Request $request){
         $request->user()->tokens()->delete();
-        return response()->json(HelperController::responseFormat(__('messages.logout_successfully')), 200);
+        return response()->json(responseFormat(__('messages.logout_successfully')), Response::HTTP_OK);
     }
 }

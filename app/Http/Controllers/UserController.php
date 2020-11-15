@@ -9,7 +9,9 @@ use App\Http\Resources\Post\PostResource;
 use App\Http\Resources\User\UserResource;
 use App\Services\PostService;
 use App\Services\UserService;
+use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class UserController extends Controller
 {
@@ -29,9 +31,8 @@ class UserController extends Controller
      */
     public function follow(FollowRequest $request)
     {
-        $validated = $request->validated();
-        $this->userService->follow($request->user()->id,$validated['following_id']);
-        return response()->json(HelperController::responseFormat(__('messages.followed_successfully')), 200);
+        $this->userService->follow($request->user()->id,$request->following_id);
+        return response()->json(responseFormat(__('messages.followed_successfully')), Response::HTTP_OK);
 
     }
 

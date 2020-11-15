@@ -45,9 +45,7 @@ class PostController extends Controller
      */
     public function store(CreateRequest $request)
     {
-        $validated = $request->validated();
-        $validated['user_id'] = $request->user()->id;
-        return new PostResource($this->postService->store($validated));
+        return new PostResource($this->postService->store($request->validated()));
     }
 
     /**

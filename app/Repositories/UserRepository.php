@@ -17,16 +17,6 @@ class UserRepository
     }
 
     /**
-     * Get all users.
-     *
-     * @return \App\User $user
-     */
-    public function list()
-    {
-        return $this->user->get();
-    }
-
-    /**
      * Store new user.
      *
      * @return \App\User $user

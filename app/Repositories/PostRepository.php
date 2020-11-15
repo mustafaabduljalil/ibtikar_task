@@ -28,16 +28,6 @@ class PostRepository
     }
 
     /**
-     * Get specific post.
-     *
-     * @return \App\Post $post
-     */
-    public function getPostDetails($id)
-    {
-        return $this->post->where('id',$id)->first();
-    }
-
-    /**
      * Store new post.
      *
      * @return \App\Post $post
